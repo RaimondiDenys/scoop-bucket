@@ -1,0 +1,37 @@
+{
+    "version":"12_11_2",
+    "description":"provides secure remote access to a corporate network using a VPN client application",
+    "homepage":"https://www.watchguard.com/it",
+    "license": {
+        "identifier":"Freeware",
+        "url":"https://www.watchguard.com/it/wgrd-trust-center/terms-of-use"
+    },
+    "architecture": {
+        "64bit": {
+            "url": "https://cdn.watchguard.com/SoftwareCenter/Files/MUVPN_SSL/12_11_2/WG-MVPN-SSL_12_11_2.exe",
+            "hash": "88AF4B30F003ADC2533B48C4B532E9918427DD6FCF9EDCDC03EB168C097265DB"
+        }
+    },
+    "post_install": [
+        "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
+        "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
+        "Start-Process -FilePath \"$dir\\WG-MVPN-SSL_12_11_2.exe\" -ArgumentList '/S' -Wait",
+        "Stop-Service -Name 'wgsslvpnc' -Force -ErrorAction 'SilentlyContinue'; Stop-Process -Name 'wgsslvpnc' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
+    ],
+    "pre_uninstall": [
+        "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
+        "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
+        "Start-Process -FilePath \"$dir\\WG-MVPN-SSL_12_11_2.exe\" -ArgumentList '/S' -Wait",
+        "Stop-Service -Name 'wgsslvpnc' -Force -ErrorAction 'SilentlyContinue'; Stop-Process -Name 'wgsslvpnc' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
+    ],
+    "checkver": "Version\\s([\\d.]+)",
+    "autoupdate": {
+        "url": "https://cdn.watchguard.com/SoftwareCenter/Files/MUVPN_SSL/$version/WG-MVPN-SSL_$version.exe",
+        "hash": {
+            "url": "https://cdn.watchguard.com/SoftwareCenter/Files/MUVPN_SSL/$version/WG-MVPN-SSL_$version.exe",
+            "regex": "$sha256"
+        }
+    }
+}
