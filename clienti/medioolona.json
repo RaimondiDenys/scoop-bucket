@@ -1,0 +1,20 @@
+{
+    "version": "1.0.0",
+    "description": "Configurazione per azienda speciale Medio Olona",
+    "homepage": "https://github.com/RaimondiDenys/scoop-bucket",
+    "license": "GPL-3.0",
+    "architecture": {
+      "64bit": {
+        "bin": [],
+        "installer": {
+          "script": []
+        }
+      }
+    },
+    "depends": [
+      "pdf24",
+      "watchguard-mobile-vpn",
+      "bit4id",
+      "arubasign"
+    ]
+  }
