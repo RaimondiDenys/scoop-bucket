@@ -17,6 +17,13 @@
           "Write-Host 'Configurazione Medio Olona installata con successo.' -ForegroundColor Green"
         ]
       }
+    },
+    "default": {
+      "installer": {
+        "script": [
+          "Write-Host 'Configurazione Medio Olona installata con successo.' -ForegroundColor Green"
+        ]
+      }
     }
   },
   "depends": [
