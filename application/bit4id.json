@@ -15,14 +15,14 @@
     "post_install": [
         "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
         "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
-        "Start-Process -FilePath \"$dir\\bit4id_win.exe\" -ArgumentList '/S' -Wait",
+        "Start-Process -FilePath \"$dir\\bit4id_win.exe\" -ArgumentList '/S'",
         "Stop-Process -Name 'crtmgr' -Force -ErrorAction 'SilentlyContinue'",
         "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
     ],
     "pre_uninstall": [
         "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
         "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
-        "Start-Process -FilePath \"$dir\\bit4id_win.exe\" -ArgumentList '/S' -Wait",
+        "Start-Process -FilePath \"$dir\\bit4id_win.exe\" -ArgumentList '/S'",
         "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
     ]
 }
