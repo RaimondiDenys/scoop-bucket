@@ -1,22 +1,22 @@
 {
-    "version":"12_11_2",
-    "description":"provides secure remote access to a corporate network using a VPN client application",
-    "homepage":"https://www.watchguard.com/it",
+    "version":"1.4.10.646",
+    "description":"Bit4id driver enables communication between your computer and Bit4id smart card readers or USB tokens for secure authentication and digital signatures.",
+    "homepage":"https://www.firmacerta.it",
     "license": {
         "identifier":"Freeware",
-        "url":"https://www.watchguard.com/it/wgrd-trust-center/terms-of-use"
+        "url":"https://www.ariaspa.it/wps/wcm/connect/761d310e-d818-43f0-a64d-3934ee0b286a/BIT4ID-SOFTWARE-LICENSE-AGREEMENT_EN.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-761d310e-d818-43f0-a64d-3934ee0b286a-nhebjIw"
     },
     "architecture": {
         "64bit": {
-            "url": "https://cdn.watchguard.com/SoftwareCenter/Files/MUVPN_SSL/12_11_2/WG-MVPN-SSL_12_11_2.exe",
-            "hash": "88AF4B30F003ADC2533B48C4B532E9918427DD6FCF9EDCDC03EB168C097265DB"
+            "url": "https://download.firmacerta.it/ca-docs/easyupgrade/bit4id_win.exe",
+            "hash": "0ABD16E0E0C442D8E70C98BDDD2459617FDCFEC03D68A18AF9C2FD7CC950085F"
         }
     },
     "post_install": [
         "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
         "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
         "Start-Process -FilePath \"$dir\\WG-MVPN-SSL_12_11_2.exe\" -ArgumentList '/silent /verysilent' -Wait",
-        "Stop-Service -Name 'wgsslvpnsrc' -Force -ErrorAction 'SilentlyContinue'; Stop-Process -Name 'wgsslvpnc' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Service -Name 'wgsslvpnc' -Force -ErrorAction 'SilentlyContinue'; Stop-Process -Name 'wgsslvpnc' -Force -ErrorAction 'SilentlyContinue'",
         "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
     ],
     "pre_uninstall": [
