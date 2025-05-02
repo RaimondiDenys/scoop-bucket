@@ -1,0 +1,33 @@
+{
+    "version":"24.1.1",
+    "description":" a software application from Aruba used for applying, managing, and verifying digital signatures and time stamps",
+    "homepage":"https://www.pec.it",
+    "license": {
+        "identifier":"Freeware",
+        "url":"https://www.pec.it/documents/tc-files/it/107_condizionigeneraliutilizzosoftwarearubasign.pdf"
+    },
+    "architecture": {
+        "64bit": {
+            "url": "https://updatesfirma.aruba.it/downloads/ArubaSign-latest(standard).msi",
+            "hash": "DDF8ED77F33D784A49F53EAE39B7BEDF6AFC141BF77D7FDE4ECE7B3E5ABBE895"
+        },
+        "32bit": {
+            "url": "https://updatesfirma.aruba.it/downloads/ArubaSign-latest(standard)x86.msi",
+            "hash": "8AAB2C2CFA07A7A340F9B5DC434BD2EB877387333096D9FEFD7C249827440223"
+        }
+    },
+    "post_install": [
+        "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
+        "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
+        "Start-Process 'msiexec' -Wait -Verb 'RunAs' -WindowStyle 'Hidden' -ArgumentList @('/i', \"$dir\\ArubaSign-latest(standard).msi\", '/qn', \"INSTALLDIR=$dir\", \"TARGETDIR=$dir\")",
+        "Stop-Service -Name 'ArubaSign64' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
+    ],
+    "pre_uninstall": [
+        "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
+        "Stop-Service -Name 'ArubaSign64' -Force -ErrorAction 'SilentlyContinue'",
+        "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
+        "Start-Process 'msiexec' -Wait -Verb 'RunAs' -WindowStyle 'Hidden' -ArgumentList @('/i', \"$dir\\ArubaSign-latest(standard).msi\", '/qn', \"INSTALLDIR=$dir\", \"TARGETDIR=$dir\")",
+        "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
+    ]
+}
