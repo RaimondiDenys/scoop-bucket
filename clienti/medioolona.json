@@ -21,7 +21,7 @@
   },
   "depends": [
     "pdf24",
-    "watchguard-vpn",
+    "watchguard-mobile-vpn",
     "bit4id",
     "arubasign"
   ]
