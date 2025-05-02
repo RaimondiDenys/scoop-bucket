@@ -15,23 +15,14 @@
     "post_install": [
         "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
         "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
-        "Start-Process -FilePath \"$dir\\WG-MVPN-SSL_12_11_2.exe\" -ArgumentList '/silent /verysilent' -Wait",
-        "Stop-Service -Name 'wgsslvpnc' -Force -ErrorAction 'SilentlyContinue'; Stop-Process -Name 'wgsslvpnc' -Force -ErrorAction 'SilentlyContinue'",
+        "Start-Process -FilePath \"$dir\\bit4id_win.exe\" -ArgumentList '/S' -Wait",
+        "Stop-Process -Name 'crtmgr' -Force -ErrorAction 'SilentlyContinue'",
         "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
     ],
     "pre_uninstall": [
         "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
-        "Stop-Service -Name 'wgsslvpnsrc' -Force -ErrorAction 'SilentlyContinue'",
         "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
-        "Start-Process -FilePath \"$dir\\WG-MVPN-SSL_12_11_2.exe\" -ArgumentList '/silent /verysilent' -Wait",
+        "Start-Process -FilePath \"$dir\\bit4id_win.exe\" -ArgumentList '/S' -Wait",
         "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
-    ],
-    "checkver": "Version\\s([\\d.]+)",
-    "autoupdate": {
-        "url": "https://cdn.watchguard.com/SoftwareCenter/Files/MUVPN_SSL/$version/WG-MVPN-SSL_$version.exe",
-        "hash": {
-            "url": "https://cdn.watchguard.com/SoftwareCenter/Files/MUVPN_SSL/$version/WG-MVPN-SSL_$version.exe",
-            "regex": "$sha256"
-        }
-    }
+    ]
 }
