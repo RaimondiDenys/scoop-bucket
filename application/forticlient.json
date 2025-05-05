@@ -1,35 +1,24 @@
 {
-    "version":"7.4.2",
-    "description":"provides secure remote access to a corporate network using a VPN client application",
-    "homepage":"https://www.fortinet.com",
-    "license": {
-        "identifier":"Freeware",
-        "url":"https://www.fortinet.com/corporate/about-us/legal"
-    },
+    "version": "7.0.7.0245",
+    "description": "FortiClient VPN-only edition, used to connect to FortiGate VPNs.",
+    "homepage": "https://www.fortinet.com/support/product-downloads#vpn",
+    "license": "Proprietary",
     "architecture": {
-        "64bit": {
-            "url": "https://links.fortinet.com/forticlient/win/vpnagent",
-            "hash": "A8F69EAA8AF029209CE937616AAD5CB751E9C732B9D17E5E1EAABD768E361D37"
-        }
+      "64bit": {
+        "url": "https://filestore.fortinet.com/forticlient/downloads/FortiClientVPNOnlineInstaller_7.0.7.0245_x64.exe",
+        "hash": "9b1cc7a2670bd94ea953e84c0d0d7e1aa95761d91ed6ac1452f1c4a3f2d3a27b"
+      }
     },
-    "post_install": [
-        "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
-        "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
-        "Start-Process -FilePath \"$dir\\vpnagent\" -ArgumentList '/quiet' -Wait",
-        "Stop-Service -Name 'FA_Scheduler' -Force -ErrorAction 'SilentlyContinue'",
-        "Stop-Process -Name 'FortiClientVPN' -Force -ErrorAction 'SilentlyContinue'",
-        "Stop-Process -Name 'FortiClientVPNInstaller' -Force -ErrorAction 'SilentlyContinue'",
-        "Stop-Process -Name 'FortiSettings' -Force -ErrorAction 'SilentlyContinue'",
-        "Stop-Process -Name 'FortiSSLVPNdaemon' -Force -ErrorAction 'SilentlyContinue'",
-        "Stop-Process -Name 'FortiTray' -Force -ErrorAction 'SilentlyContinue'",
-        "Stop-Process -Name 'FortiVPN' -Force -ErrorAction 'SilentlyContinue'",
-        "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
-    ],
-    "pre_uninstall": [
-        "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
-        "Stop-Service -Name 'FA_Scheduler' -Force -ErrorAction 'SilentlyContinue'",
-        "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
-        "Start-Process -FilePath \"$dir\\vpnagent\" -ArgumentList '/quiet' -Wait",
-        "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
-    ]
-}
+    "installer": {
+      "script": [
+        "Start-Process -Wait -FilePath \"$dir\\FortiClientVPNOnlineInstaller_7.0.7.0245_x64.exe\" -ArgumentList \"/quiet\""
+      ]
+    },
+    "uninstaller": {
+      "script": [
+        "Start-Process -Wait -FilePath \"C:\\Program Files\\Fortinet\\FortiClient\\uninstall.exe\" -ArgumentList \"/quiet\""
+      ]
+    },
+    "post_install": "Write-Host 'FortiClient VPN installed. Launch from Start Menu.'"
+  }
+  
