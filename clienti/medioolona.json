@@ -1,35 +1,12 @@
 {
-  "version": "1.0.0",
-  "description": "Configurazione per azienda speciale Medio Olona",
-  "homepage": "https://github.com/RaimondiDenys/scoop-bucket",
-  "license": "GPL-3.0",
-  "architecture": {
-    "64bit": {
-      "installer": {
-        "script": [
-          "Write-Host 'Configurazione Medio Olona installata con successo.' -ForegroundColor Green"
-        ]
-      }
-    },
-    "32bit": {
-      "installer": {
-        "script": [
-          "Write-Host 'Configurazione Medio Olona installata con successo.' -ForegroundColor Green"
-        ]
-      }
-    },
-    "default": {
-      "installer": {
-        "script": [
-          "Write-Host 'Configurazione Medio Olona installata con successo.' -ForegroundColor Green"
-        ]
-      }
-    }
-  },
+  "version": "1.0",
+  "description": "Pacchettizzazione applicativi per Medio Olona",
+  "homepage": "https://www.aziendaspecialemedioolona.it",
+  "license": "MIT",
   "depends": [
-    "pdf24",
-    "watchguard-mobile-vpn",
-    "bit4id",
-    "arubasign"
+      "arubasign",
+      "bit4id",
+      "pdf24",
+      "watchguard-mobile-vpn"
   ]
 }
