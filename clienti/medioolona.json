@@ -5,10 +5,8 @@
   "license": "MIT",
   "architecture": {
     "64bit": {
-      "bin": [],
-      "installer": {
-        "script": ""
-      }
+      "url": "",
+      "hash": ""
     }
   },
   "depends": [
