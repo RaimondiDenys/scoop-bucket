@@ -15,7 +15,7 @@
     "post_install": [
         "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
         "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
-        "Start-Process -FilePath \"$dir\\FortiClientVPNInstaller.exe\" -ArgumentList '/quiet' -Wait",
+        "Start-Process -FilePath \"$dir\\vpnagent\" -ArgumentList '/quiet' -Wait",
         "Stop-Service -Name 'FA_Scheduler' -Force -ErrorAction 'SilentlyContinue'",
         "Stop-Process -Name 'FortiClientVPN' -Force -ErrorAction 'SilentlyContinue'",
         "Stop-Process -Name 'FortiClientVPNInstaller' -Force -ErrorAction 'SilentlyContinue'",
@@ -29,7 +29,7 @@
         "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
         "Stop-Service -Name 'FA_Scheduler' -Force -ErrorAction 'SilentlyContinue'",
         "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
-        "Start-Process -FilePath \"$dir\\FortiClientVPNInstaller.exe\" -ArgumentList '/quiet' -Wait",
+        "Start-Process -FilePath \"$dir\\vpnagent\" -ArgumentList '/quiet' -Wait",
         "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
     ]
 }
