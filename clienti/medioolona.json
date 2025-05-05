@@ -3,10 +3,18 @@
   "description": "Pacchettizzazione applicativi per Medio Olona",
   "homepage": "https://www.aziendaspecialemedioolona.it",
   "license": "MIT",
+  "architecture": {
+    "64bit": {
+      "bin": [],
+      "installer": {
+        "script": ""
+      }
+    }
+  },
   "depends": [
-      "arubasign",
-      "bit4id",
-      "pdf24",
-      "watchguard-mobile-vpn"
+    "arubasign",
+    "bit4id",
+    "pdf24",
+    "watchguard-mobile-vpn"
   ]
 }
