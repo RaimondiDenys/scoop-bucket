@@ -1,0 +1,35 @@
+{
+    "version":"7.4.2",
+    "description":"provides secure remote access to a corporate network using a VPN client application",
+    "homepage":"https://www.fortinet.com",
+    "license": {
+        "identifier":"Freeware",
+        "url":"https://www.fortinet.com/corporate/about-us/legal"
+    },
+    "architecture": {
+        "64bit": {
+            "url": "https://links.fortinet.com/forticlient/win/vpnagent",
+            "hash": "A8F69EAA8AF029209CE937616AAD5CB751E9C732B9D17E5E1EAABD768E361D37"
+        }
+    },
+    "post_install": [
+        "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
+        "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
+        "Start-Process -FilePath \"$dir\\FortiClientVPNInstaller.exe\" -ArgumentList '/quiet' -Wait",
+        "Stop-Service -Name 'FA_Scheduler' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Process -Name 'FortiClientVPN' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Process -Name 'FortiClientVPNInstaller' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Process -Name 'FortiSettings' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Process -Name 'FortiSSLVPNdaemon' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Process -Name 'FortiTray' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Process -Name 'FortiVPN' -Force -ErrorAction 'SilentlyContinue'",
+        "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
+    ],
+    "pre_uninstall": [
+        "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
+        "Stop-Service -Name 'FA_Scheduler' -Force -ErrorAction 'SilentlyContinue'",
+        "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
+        "Start-Process -FilePath \"$dir\\FortiClientVPNInstaller.exe\" -ArgumentList '/quiet' -Wait",
+        "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
+    ]
+}
