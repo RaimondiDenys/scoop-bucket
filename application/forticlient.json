@@ -1,11 +1,35 @@
 {
-    "version": "5.6.6.1167",
-    "url": "https://fortinet-public.s3.cn-north-1.amazonaws.com.cn/FortiClient_Download/FortiClient_5_6_6_windows_and_macos_system/FortiClientSetup_5.6.6.1167_vpnonly_x64.exe#/FortiClientSetup.exe",
+    "version": "7.4.2.1737",
+    "description": "FortiClient VPN - SSL and IPsec VPN client for secure remote access.",
+    "homepage": "https://www.forticlient.com/",
+    "license": "Proprietary",
+    "architecture": {
+      "64bit": {
+        "url": "https://download.fortinet.com/public/forticlient/forticlient_vpn_7.4.2.1737_x64.msi",
+        "hash": "sha256:REPLACE_WITH_ACTUAL_HASH"
+      }
+    },
     "installer": {
-        "script": [
-            "Start-Process -Wait -WindowStyle Hidden cmd \"/c call `\"$dir\\FortiClientSetup.exe`\" -s /quiet\" -Verb RunAs",
-            "Remove-Item \"$dir\\FortiClientSetup.exe\"",
-            "Remove-Item \"C:\\Users\\Public\\Desktop\\FortiClient.lnk\""
-        ]
+      "args": [
+        "/quiet",
+        "/norestart"
+      ]
+    },
+    "uninstaller": {
+      "script": [
+        "Start-Process -Wait -FilePath \"msiexec\" -ArgumentList \"/x {F0D0DE9E-7D36-47F8-9432-...} /quiet /norestart\" -Verb RunAs"
+      ]
+    },
+    "checkver": {
+      "url": "https://www.forticlient.com/",
+      "regex": "FortiClient VPN.*?Windows.*?([\\d.]+)"
+    },
+    "autoupdate": {
+      "architecture": {
+        "64bit": {
+          "url": "https://download.fortinet.com/public/forticlient/forticlient_vpn_$version_x64.msi"
+        }
+      }
     }
-}
+  }
+  
