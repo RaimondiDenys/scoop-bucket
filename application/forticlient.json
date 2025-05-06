@@ -1,35 +1,27 @@
 {
-    "version": "7.4.2.1737",
-    "description": "FortiClient VPN - SSL and IPsec VPN client for secure remote access.",
-    "homepage": "https://www.forticlient.com/",
-    "license": "Proprietary",
+    "version":"1.4.10.646",
+    "description":"Bit4id driver enables communication between your computer and Bit4id smart card readers or USB tokens for secure authentication and digital signatures.",
+    "homepage":"https://www.fortinet.com",
+    "license": {
+        "identifier":"Freeware",
+        "url":"https://www.fortinet.com/corporate/about-us/legal"
+    },
     "architecture": {
-      "64bit": {
-        "url": "https://download.fortinet.com/public/forticlient/forticlient_vpn_7.4.2.1737_x64.msi",
-        "hash": "sha256:REPLACE_WITH_ACTUAL_HASH"
-      }
-    },
-    "installer": {
-      "args": [
-        "/quiet",
-        "/norestart"
-      ]
-    },
-    "uninstaller": {
-      "script": [
-        "Start-Process -Wait -FilePath \"msiexec\" -ArgumentList \"/x {F0D0DE9E-7D36-47F8-9432-...} /quiet /norestart\" -Verb RunAs"
-      ]
-    },
-    "checkver": {
-      "url": "https://www.forticlient.com/",
-      "regex": "FortiClient VPN.*?Windows.*?([\\d.]+)"
-    },
-    "autoupdate": {
-      "architecture": {
         "64bit": {
-          "url": "https://download.fortinet.com/public/forticlient/forticlient_vpn_$version_x64.msi"
+            "url": "https://links.fortinet.com/forticlient/win64/fabricagent",
+            "hash": "6C98919C5A7E2230EF1857FDA74595E0A3A51040283CDFEE20CBC3AAB381DFE9"
         }
-      }
-    }
-  }
-  
+    },
+    "post_install": [
+        "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
+        "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
+        "Start-Process -FilePath \"$dir\\FortiClientInstaller.exe\" -ArgumentList '/quiet /norestart'",
+
+        "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
+    ],
+    "pre_uninstall": [
+        "if (!(is_admin)) { error \"$app requires admin rights to $cmd\"; break }",
+        "Write-Host \"Please wait and don't cancel the script...\" -F 'Yellow'",
+        "Stop-Process -Name 'explorer' -Force -ErrorAction 'SilentlyContinue'; Start-Sleep -Seconds 3"
+    ]
+}
